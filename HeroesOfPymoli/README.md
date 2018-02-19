@@ -1,4 +1,10 @@
 
+# Observable Trends
+
+###### 1)
+###### 2)
+###### 3)
+
 
 ```python
 # Dependencies
@@ -219,7 +225,7 @@ heroes_df.count()
 
 
 
-## Total Unique Players
+# Total Unique Players
 
 
 ```python
@@ -235,7 +241,7 @@ total_players
 
 
 
-## Purchasing Analysis (Total)
+# Purchasing Analysis (Total)
 
 
 ```python
@@ -318,7 +324,7 @@ purchase_analysis_df
 
 
 
-## Gender Demographics
+# Gender Demographics
 
 
 ```python
@@ -558,7 +564,7 @@ gender_demo
 
 
 
-## Purchasing Analysis (Gender)
+# Purchasing Analysis (Gender)
 
 
 ```python
@@ -570,7 +576,7 @@ grouped_gender
 
 
 
-    <pandas.core.groupby.DataFrameGroupBy object at 0x000002866217B4E0>
+    <pandas.core.groupby.DataFrameGroupBy object at 0x0000027025070D30>
 
 
 
@@ -675,7 +681,7 @@ gender_purchasing_analysis
 
 
 
-## Age Demographics
+# Age Demographics
 
 
 ```python
@@ -683,11 +689,12 @@ gender_purchasing_analysis
 bins = [2, 9, 14, 19, 24, 29, 34, 39, 99]
 labels = ['<10', '10-14', '15-19', '20-24', '25-29', '30-34', '35-39', '40+']
 
+# Add bins column to dataframe
 unique_heroes_df['Age Range'] = pd.cut(unique_heroes_df['Age'], bins=bins, labels=labels)
 unique_heroes_df.head()
 ```
 
-    C:\Users\Justin\Anaconda3\envs\PythonData\lib\site-packages\ipykernel\__main__.py:5: SettingWithCopyWarning: 
+    C:\Users\Justin\Anaconda3\envs\PythonData\lib\site-packages\ipykernel\__main__.py:6: SettingWithCopyWarning: 
     A value is trying to be set on a copy of a slice from a DataFrame.
     Try using .loc[row_indexer,col_indexer] = value instead
     
@@ -998,7 +1005,7 @@ age_demo_df
 
 
 
-## Purchasing Analysis (Age)
+# Purchasing Analysis (Age)
 
 
 ```python
@@ -1144,7 +1151,7 @@ age_purchasing_analysis
 
 
 
-## Top Spenders
+# Top Spenders
 
 
 ```python
@@ -1263,7 +1270,7 @@ top_spenders_analysis.head()
 
 
 
-## Most Popular Items
+# Most Popular Items
 
 
 ```python
@@ -1275,7 +1282,7 @@ grouped_items
 
 
 
-    <pandas.core.groupby.DataFrameGroupBy object at 0x0000028661F0CE10>
+    <pandas.core.groupby.DataFrameGroupBy object at 0x0000027025073128>
 
 
 
@@ -1624,7 +1631,7 @@ most_popular_analysis.head()
 
 
 
-## Most Profitable Items
+# Most Profitable Items
 
 
 ```python
