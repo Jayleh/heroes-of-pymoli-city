@@ -1,9 +1,9 @@
 
 # Observable Trends
 
-###### 1)
-###### 2)
-###### 3)
+###### 1) Based on the district summary analysis, the percentage of students who passed math is generally lower than that of who passed reading. Within each district school, passing rates in math is significantly lower than passing rates in reading. In general, district schools had lower overall passing rates compared to charter schools with an approximate 20% difference.
+###### 2) Average math and reading scores stayed very consistent throughout each school's grade levels.
+###### 3) Small and medium school sizes had a signifantly higher percent overall passing rate than large schools.
 
 
 ```python
@@ -303,7 +303,7 @@ grouped_shools
 
 
 
-    <pandas.core.groupby.DataFrameGroupBy object at 0x00000177EC44EE80>
+    <pandas.core.groupby.DataFrameGroupBy object at 0x000002A99A57F400>
 
 
 

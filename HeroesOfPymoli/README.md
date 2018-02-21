@@ -1,9 +1,9 @@
 
 # Observable Trends
 
-###### 1)
-###### 2)
-###### 3)
+###### 1. Most players who play Heroes of Pymoli are male (81.15%).
+###### 2. Close to half the players (45.2%) from the game's database range from ages 20 to 24. This age group has also contributed approximately 45% of the total amount of purchases.
+###### 3. The most popular and also the most profitable item purchased is the Final Critic, with 14 purchased for a total of $38.60.
 
 
 ```python
@@ -576,7 +576,7 @@ grouped_gender
 
 
 
-    <pandas.core.groupby.DataFrameGroupBy object at 0x0000027025070D30>
+    <pandas.core.groupby.DataFrameGroupBy object at 0x00000237ADABBDA0>
 
 
 
@@ -1282,7 +1282,7 @@ grouped_items
 
 
 
-    <pandas.core.groupby.DataFrameGroupBy object at 0x0000027025073128>
+    <pandas.core.groupby.DataFrameGroupBy object at 0x00000237ADAC1C18>
 
 
 
