@@ -239,6 +239,7 @@ district_summary = pd.DataFrame({'Total Schools': [total_schools],
 district_summary = district_summary[['Total Schools', 'Total Students', 'Total Budget', 'Average Math Score', 
                                      'Average Reading Score', '% Passing Math', '% Passing Reading', '% Overall Passing Rate']]
 
+# District Summary
 district_summary
 ```
 
@@ -303,7 +304,7 @@ grouped_shools
 
 
 
-    <pandas.core.groupby.DataFrameGroupBy object at 0x000002A99A57F400>
+    <pandas.core.groupby.DataFrameGroupBy object at 0x00000218BC857AC8>
 
 
 
@@ -673,6 +674,8 @@ combined_stu_sch = combined_stu_sch.sort_values(by=['School Name'])
 
 # Index school for visibility
 combined_stu_sch = combined_stu_sch.set_index(['School Name'])
+
+# School Summary
 combined_stu_sch
 ```
 
@@ -913,6 +916,8 @@ combined_stu_sch
 ```python
 # Sort
 top_schools = combined_stu_sch.sort_values(by=['% Overall Passing Rate'], ascending=False)
+
+# Top Performing Schools (By Passing Rate)
 top_schools.head()
 ```
 
@@ -1033,6 +1038,8 @@ top_schools.head()
 ```python
 # Sort
 bottom_schools = combined_stu_sch.sort_values(by=['% Overall Passing Rate'])
+
+# Bottom Performing Schools (By Passing Rate)
 bottom_schools.head()
 ```
 
@@ -1254,6 +1261,8 @@ unstack_math_score
 
 # Reorder grade columns
 math_by_grade = unstack_math_score[['9th', '10th', '11th', '12th']]
+
+# Math Scores by Grade
 math_by_grade
 
 # Could also use pivot instead of unstack()
@@ -1422,6 +1431,8 @@ unstack_read_score
 
 # Reorder grade columns
 read_by_grade = unstack_read_score[['9th', '10th', '11th', '12th']]
+
+# Reading Scores by Grade
 read_by_grade
 ```
 
@@ -1571,7 +1582,7 @@ read_by_grade
 
 
 
-# Scores by School Spending (Per Student)
+# Scores by School Spending
 
 
 ```python
@@ -2021,6 +2032,8 @@ scores_by_spending_analysis = pd.DataFrame({'Average Math Score': avg_math_score
 
 # Reorder columns using iloc
 scores_by_spending_analysis = scores_by_spending_analysis.iloc[:, [3, 4, 1, 2, 0]]
+
+# Scores by School Spending
 scores_by_spending_analysis
 ```
 
@@ -2099,7 +2112,7 @@ scores_by_spending_analysis
 
 
 
-# Scores by School Size (Per Student)
+# Scores by School Size
 
 
 ```python
@@ -2336,6 +2349,8 @@ scores_by_size_analysis = pd.DataFrame({'Average Math Score': avg_math_score,
 
 # Reorder columns using iloc
 scores_by_size_analysis = scores_by_size_analysis.iloc[:, [3, 4, 1, 2, 0]]
+
+# Scores by School Size
 scores_by_size_analysis
 ```
 
@@ -2406,7 +2421,7 @@ scores_by_size_analysis
 
 
 
-# Scores by School Type (Per Student)
+# Scores by School Type
 
 
 ```python
@@ -2451,6 +2466,8 @@ scores_by_type_analysis = pd.DataFrame({'Average Math Score': avg_math_score,
 
 # Reorder columns using iloc
 scores_by_type_analysis = scores_by_type_analysis.iloc[:, [3, 4, 1, 2, 0]]
+
+# Scores by School Type
 scores_by_type_analysis
 ```
 

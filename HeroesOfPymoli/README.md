@@ -272,14 +272,16 @@ print(revenue)
 ```python
 # Create purchasing analysis dataframe
 purchase_analysis = {'Number of Unique Items': [number_unique_items], 
-                     'Average Price': [f'{avg_price:.2f}'], 
+                     'Average Price': [f'${avg_price:.2f}'], 
                      'Number of Purchases': [purchases], 
-                     'Total Revenue': [f'{revenue:.2f}']}
+                     'Total Revenue': [f'${revenue:,.2f}']}
 
 purchase_analysis_df = pd.DataFrame(purchase_analysis)
 
+# Reorder columns
 purchase_analysis_df = purchase_analysis_df[['Number of Unique Items', 'Average Price', 'Number of Purchases', 'Total Revenue']]
 
+# Purchasing Analysis (Total)
 purchase_analysis_df
 ```
 
@@ -314,9 +316,9 @@ purchase_analysis_df
     <tr>
       <th>0</th>
       <td>179</td>
-      <td>2.93</td>
+      <td>$2.93</td>
       <td>780</td>
-      <td>2286.33</td>
+      <td>$2,286.33</td>
     </tr>
   </tbody>
 </table>
@@ -509,6 +511,8 @@ unique_grouped_gender_df = unique_grouped_gender_df.rename(columns={'SN': 'Total
 
 # Reorganize columns
 gender_demo = unique_grouped_gender_df[['Percentage of Players', 'Total Count']]
+
+# Gender Demographics
 gender_demo
 ```
 
@@ -576,7 +580,7 @@ grouped_gender
 
 
 
-    <pandas.core.groupby.DataFrameGroupBy object at 0x00000237ADABBDA0>
+    <pandas.core.groupby.DataFrameGroupBy object at 0x000002246480A6D8>
 
 
 
@@ -611,11 +615,26 @@ total_purchase_value
 # Create Purchasing Analysis (Gender)
 gender_purchasing_analysis = pd.DataFrame({'Purchase Count': purchase_count, 
                                            'Average Purchase Price': avg_purchase_price, 
-                                           'Total Purchase Value': total_purchase_value, 
-                                           'Normalized Totals': [0, 0, 0]})
+                                           'Total Purchase Value': total_purchase_value})
 # Reorder columns
-gender_purchasing_analysis = gender_purchasing_analysis[['Purchase Count', 'Average Purchase Price', 'Total Purchase Value', 'Normalized Totals']]
+gender_purchasing_analysis = gender_purchasing_analysis[['Purchase Count', 'Average Purchase Price', 'Total Purchase Value']]
 
+# Find mean and standard deviation of average purchase price of the population
+mean_norm = heroes_df['Price'].mean()
+stdev_norm = heroes_df['Price'].std()
+
+# Calculate the z value, standard score of a raw score 
+z_value = (gender_purchasing_analysis['Average Purchase Price']-mean_norm)/stdev_norm
+
+# Calculate normalized totals and add to analysis
+gender_purchasing_analysis['Normalized Totals'] = gender_purchasing_analysis['Average Purchase Price']+z_value
+
+# Format values
+gender_purchasing_analysis['Average Purchase Price'] = gender_purchasing_analysis['Average Purchase Price'].map("${:.2f}".format)
+gender_purchasing_analysis['Total Purchase Value'] = gender_purchasing_analysis['Total Purchase Value'].map("${:,.2f}".format)
+gender_purchasing_analysis['Normalized Totals'] = gender_purchasing_analysis['Normalized Totals'].map("${:.2f}".format)
+
+# Purchase Analysis (Gender)
 gender_purchasing_analysis
 ```
 
@@ -657,23 +676,23 @@ gender_purchasing_analysis
     <tr>
       <th>Female</th>
       <td>136</td>
-      <td>2.815515</td>
-      <td>382.91</td>
-      <td>0</td>
+      <td>$2.82</td>
+      <td>$382.91</td>
+      <td>$2.71</td>
     </tr>
     <tr>
       <th>Male</th>
       <td>633</td>
-      <td>2.950521</td>
-      <td>1867.68</td>
-      <td>0</td>
+      <td>$2.95</td>
+      <td>$1,867.68</td>
+      <td>$2.97</td>
     </tr>
     <tr>
       <th>Other / Non-Disclosed</th>
       <td>11</td>
-      <td>3.249091</td>
-      <td>35.74</td>
-      <td>0</td>
+      <td>$3.25</td>
+      <td>$35.74</td>
+      <td>$3.53</td>
     </tr>
   </tbody>
 </table>
@@ -925,6 +944,8 @@ age_demo_df = age_demo_df.rename(columns={'Age': 'Total Count'})
 
 # Reduce dataframe and reorganize columns
 age_demo_df = age_demo_df[['Percentage of Players', 'Total Count']]
+
+# Age Demographics
 age_demo_df
 ```
 
@@ -1046,11 +1067,26 @@ total_purchase_value
 # Create Purchasing Analysis (Age)
 age_purchasing_analysis = pd.DataFrame({'Purchase Count': purchase_count, 
                                            'Average Purchase Price': avg_purchase_price, 
-                                           'Total Purchase Value': total_purchase_value, 
-                                           'Normalized Totals': [0, 0, 0, 0, 0, 0, 0, 0]})
+                                           'Total Purchase Value': total_purchase_value})
 # Reorder columns
-age_purchasing_analysis = age_purchasing_analysis[['Purchase Count', 'Average Purchase Price', 'Total Purchase Value', 'Normalized Totals']]
+age_purchasing_analysis = age_purchasing_analysis[['Purchase Count', 'Average Purchase Price', 'Total Purchase Value']]
 
+# Find mean and standard deviation of average purchase price of the population
+mean_norm = heroes_df['Price'].mean()
+stdev_norm = heroes_df['Price'].std()
+
+# Calculate the z value, standard score of a raw score 
+z_value = (age_purchasing_analysis['Average Purchase Price']-mean_norm)/stdev_norm
+
+# Calculate normalized totals and add to analysis
+age_purchasing_analysis['Normalized Totals'] = age_purchasing_analysis['Average Purchase Price']+z_value
+
+# Format values
+age_purchasing_analysis['Average Purchase Price'] = age_purchasing_analysis['Average Purchase Price'].map("${:.2f}".format)
+age_purchasing_analysis['Total Purchase Value'] = age_purchasing_analysis['Total Purchase Value'].map("${:,.2f}".format)
+age_purchasing_analysis['Normalized Totals'] = age_purchasing_analysis['Normalized Totals'].map("${:.2f}".format)
+
+# Purchasing Analysis (Age)
 age_purchasing_analysis
 ```
 
@@ -1092,58 +1128,58 @@ age_purchasing_analysis
     <tr>
       <th>&lt;10</th>
       <td>19</td>
-      <td>3.13</td>
-      <td>59.45</td>
-      <td>0</td>
+      <td>$3.13</td>
+      <td>$59.45</td>
+      <td>$3.31</td>
     </tr>
     <tr>
       <th>10-14</th>
       <td>23</td>
-      <td>2.70</td>
-      <td>62.04</td>
-      <td>0</td>
+      <td>$2.70</td>
+      <td>$62.04</td>
+      <td>$2.49</td>
     </tr>
     <tr>
       <th>15-19</th>
       <td>100</td>
-      <td>2.90</td>
-      <td>289.88</td>
-      <td>0</td>
+      <td>$2.90</td>
+      <td>$289.88</td>
+      <td>$2.87</td>
     </tr>
     <tr>
       <th>20-24</th>
       <td>259</td>
-      <td>2.96</td>
-      <td>765.69</td>
-      <td>0</td>
+      <td>$2.96</td>
+      <td>$765.69</td>
+      <td>$2.99</td>
     </tr>
     <tr>
       <th>25-29</th>
       <td>87</td>
-      <td>3.03</td>
-      <td>263.53</td>
-      <td>0</td>
+      <td>$3.03</td>
+      <td>$263.53</td>
+      <td>$3.12</td>
     </tr>
     <tr>
       <th>30-34</th>
       <td>47</td>
-      <td>3.25</td>
-      <td>152.60</td>
-      <td>0</td>
+      <td>$3.25</td>
+      <td>$152.60</td>
+      <td>$3.54</td>
     </tr>
     <tr>
       <th>35-39</th>
       <td>27</td>
-      <td>2.91</td>
-      <td>78.65</td>
-      <td>0</td>
+      <td>$2.91</td>
+      <td>$78.65</td>
+      <td>$2.89</td>
     </tr>
     <tr>
       <th>40+</th>
       <td>11</td>
-      <td>3.11</td>
-      <td>34.25</td>
-      <td>0</td>
+      <td>$3.11</td>
+      <td>$34.25</td>
+      <td>$3.27</td>
     </tr>
   </tbody>
 </table>
@@ -1197,6 +1233,10 @@ top_spenders_analysis = top_spenders_analysis[['Purchase Count', 'Average Purcha
 # Sort values by total purchase value
 top_spenders_analysis = top_spenders_analysis.sort_values(by='Total Purchase Value', ascending=False)
 
+# Format values
+top_spenders_analysis['Average Purchase Price'] = top_spenders_analysis['Average Purchase Price'].map('${:.2f}'.format)
+top_spenders_analysis['Total Purchase Value'] = top_spenders_analysis['Total Purchase Value'].map('${:.2f}'.format)
+
 # Top 5 Spenders
 top_spenders_analysis.head()
 ```
@@ -1237,32 +1277,32 @@ top_spenders_analysis.head()
     <tr>
       <th>Undirrala66</th>
       <td>5</td>
-      <td>3.41</td>
-      <td>17.06</td>
+      <td>$3.41</td>
+      <td>$17.06</td>
     </tr>
     <tr>
       <th>Saedue76</th>
       <td>4</td>
-      <td>3.39</td>
-      <td>13.56</td>
+      <td>$3.39</td>
+      <td>$13.56</td>
     </tr>
     <tr>
       <th>Mindimnya67</th>
       <td>4</td>
-      <td>3.18</td>
-      <td>12.74</td>
+      <td>$3.18</td>
+      <td>$12.74</td>
     </tr>
     <tr>
       <th>Haellysu29</th>
       <td>3</td>
-      <td>4.24</td>
-      <td>12.73</td>
+      <td>$4.24</td>
+      <td>$12.73</td>
     </tr>
     <tr>
       <th>Eoda93</th>
       <td>3</td>
-      <td>3.86</td>
-      <td>11.58</td>
+      <td>$3.86</td>
+      <td>$11.58</td>
     </tr>
   </tbody>
 </table>
@@ -1282,7 +1322,7 @@ grouped_items
 
 
 
-    <pandas.core.groupby.DataFrameGroupBy object at 0x00000237ADAC1C18>
+    <pandas.core.groupby.DataFrameGroupBy object at 0x0000022464808BA8>
 
 
 
@@ -1552,6 +1592,12 @@ most_popular_analysis = most_popular_analysis.set_index(['Item ID', 'Item Name']
 
 # Sort by greatest purchase count
 most_popular_analysis = most_popular_analysis.sort_values(by=['Purchase Count'], ascending=False)
+
+# Format values
+most_popular_analysis['Item Price'] = most_popular_analysis['Item Price'].map('${:.2f}'.format)
+most_popular_analysis['Total Purchase Value'] = most_popular_analysis['Total Purchase Value'].map('${:.2f}'.format)
+
+# Most Popular Items Analysis
 most_popular_analysis.head()
 ```
 
@@ -1594,36 +1640,36 @@ most_popular_analysis.head()
       <th>92</th>
       <th>Final Critic</th>
       <td>14</td>
-      <td>1.36</td>
-      <td>38.60</td>
+      <td>$1.36</td>
+      <td>$38.60</td>
     </tr>
     <tr>
       <th>84</th>
       <th>Arcane Gem</th>
       <td>11</td>
-      <td>2.23</td>
-      <td>24.53</td>
+      <td>$2.23</td>
+      <td>$24.53</td>
     </tr>
     <tr>
       <th>39</th>
       <th>Betrayal, Whisper of Grieving Widows</th>
       <td>11</td>
-      <td>2.35</td>
-      <td>25.85</td>
+      <td>$2.35</td>
+      <td>$25.85</td>
     </tr>
     <tr>
       <th>30</th>
       <th>Stormcaller</th>
       <td>10</td>
-      <td>4.15</td>
-      <td>34.65</td>
+      <td>$4.15</td>
+      <td>$34.65</td>
     </tr>
     <tr>
       <th>175</th>
       <th>Woeful Adamantite Claymore</th>
       <td>9</td>
-      <td>1.24</td>
-      <td>11.16</td>
+      <td>$1.24</td>
+      <td>$11.16</td>
     </tr>
   </tbody>
 </table>
@@ -1635,8 +1681,18 @@ most_popular_analysis.head()
 
 
 ```python
-# Most Profitable Items Analysis
+# Format values back to numeric
+most_popular_analysis['Item Price'] = pd.to_numeric(most_popular_analysis['Item Price'].str.replace('$', ''))
+most_popular_analysis['Total Purchase Value'] = pd.to_numeric(most_popular_analysis['Total Purchase Value'].str.replace('$', ''))
+
+# Sort by total purchase value
 most_profit_analysis = most_popular_analysis.sort_values(by=['Total Purchase Value'], ascending=False)
+
+# Format values
+most_profit_analysis['Item Price'] = most_profit_analysis['Item Price'].map('${:.2f}'.format)
+most_profit_analysis['Total Purchase Value'] = most_profit_analysis['Total Purchase Value'].map('${:.2f}'.format)
+
+# Most Profitable Items Analysis
 most_profit_analysis.head()
 ```
 
@@ -1679,36 +1735,36 @@ most_profit_analysis.head()
       <th>92</th>
       <th>Final Critic</th>
       <td>14</td>
-      <td>1.36</td>
-      <td>38.60</td>
+      <td>$1.36</td>
+      <td>$38.60</td>
     </tr>
     <tr>
       <th>34</th>
       <th>Retribution Axe</th>
       <td>9</td>
-      <td>4.14</td>
-      <td>37.26</td>
+      <td>$4.14</td>
+      <td>$37.26</td>
     </tr>
     <tr>
       <th>30</th>
       <th>Stormcaller</th>
       <td>10</td>
-      <td>4.15</td>
-      <td>34.65</td>
+      <td>$4.15</td>
+      <td>$34.65</td>
     </tr>
     <tr>
       <th>115</th>
       <th>Spectral Diamond Doomblade</th>
       <td>7</td>
-      <td>4.25</td>
-      <td>29.75</td>
+      <td>$4.25</td>
+      <td>$29.75</td>
     </tr>
     <tr>
       <th>32</th>
       <th>Orenmir</th>
       <td>6</td>
-      <td>4.95</td>
-      <td>29.70</td>
+      <td>$4.95</td>
+      <td>$29.70</td>
     </tr>
   </tbody>
 </table>
