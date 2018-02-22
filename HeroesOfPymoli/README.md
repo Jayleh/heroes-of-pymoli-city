@@ -246,7 +246,7 @@ total_players
 
 ```python
 # Number of unique items
-number_unique_items = len(heroes_df['Item Name'].unique())
+number_unique_items = len(heroes_df['Item ID'].unique())
 print(number_unique_items)
 
 # Average purchase price of unique items
@@ -262,7 +262,7 @@ revenue = heroes_df['Price'].sum()
 print(revenue)
 ```
 
-    179
+    183
     2.931192307692303
     780
     2286.3299999999963
@@ -315,7 +315,7 @@ purchase_analysis_df
   <tbody>
     <tr>
       <th>0</th>
-      <td>179</td>
+      <td>183</td>
       <td>$2.93</td>
       <td>780</td>
       <td>$2,286.33</td>
@@ -580,7 +580,7 @@ grouped_gender
 
 
 
-    <pandas.core.groupby.DataFrameGroupBy object at 0x000002246480A6D8>
+    <pandas.core.groupby.DataFrameGroupBy object at 0x0000017669706828>
 
 
 
@@ -1315,14 +1315,14 @@ top_spenders_analysis.head()
 
 ```python
 # Group by Item Name
-grouped_items = heroes_df.groupby(['Item Name'])
+grouped_items = heroes_df.groupby(['Item ID'])
 grouped_items
 ```
 
 
 
 
-    <pandas.core.groupby.DataFrameGroupBy object at 0x0000022464808BA8>
+    <pandas.core.groupby.DataFrameGroupBy object at 0x00000176696B10F0>
 
 
 
@@ -1340,12 +1340,12 @@ total_purchase_value.head()
 
 
 
-    Item Name
-    Abyssal Shard                      6.12
-    Aetherius, Boon of the Blessed    19.00
-    Agatha                             9.55
-    Alpha                             10.92
-    Alpha, Oath of Zeal               20.16
+    Item ID
+    0    1.82
+    1    9.12
+    2    3.40
+    3    1.79
+    4    2.28
     Name: Price, dtype: float64
 
 
@@ -1381,7 +1381,7 @@ most_popular_count_total.head()
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Item Name</th>
+      <th>Item ID</th>
       <th>Purchase Count</th>
       <th>Total Purchase Value</th>
     </tr>
@@ -1389,33 +1389,33 @@ most_popular_count_total.head()
   <tbody>
     <tr>
       <th>0</th>
-      <td>Abyssal Shard</td>
-      <td>3</td>
-      <td>6.12</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1.82</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Aetherius, Boon of the Blessed</td>
+      <td>1</td>
       <td>4</td>
-      <td>19.00</td>
+      <td>9.12</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Agatha</td>
-      <td>5</td>
-      <td>9.55</td>
+      <td>2</td>
+      <td>1</td>
+      <td>3.40</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Alpha</td>
-      <td>7</td>
-      <td>10.92</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1.79</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Alpha, Oath of Zeal</td>
-      <td>7</td>
-      <td>20.16</td>
+      <td>4</td>
+      <td>1</td>
+      <td>2.28</td>
     </tr>
   </tbody>
 </table>
@@ -1429,7 +1429,7 @@ most_popular_count_total.head()
 most_popular_id_price = heroes_df[['Item Name', 'Item ID', 'Price']]
 
 # Drop duplicate Item Names
-most_popular_id_price = most_popular_id_price.drop_duplicates(subset='Item Name', keep='first')
+most_popular_id_price = most_popular_id_price.drop_duplicates(subset='Item ID', keep='first')
 
 most_popular_id_price.head()
 ```
@@ -1500,7 +1500,7 @@ most_popular_id_price.head()
 
 ```python
 # Merge dataframes on Item Name
-combined_most_popular = pd.merge(most_popular_count_total, most_popular_id_price, on='Item Name', how='inner')
+combined_most_popular = pd.merge(most_popular_count_total, most_popular_id_price, on='Item ID', how='inner')
 combined_most_popular.head()
 ```
 
@@ -1525,53 +1525,53 @@ combined_most_popular.head()
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Item Name</th>
+      <th>Item ID</th>
       <th>Purchase Count</th>
       <th>Total Purchase Value</th>
-      <th>Item ID</th>
+      <th>Item Name</th>
       <th>Price</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Abyssal Shard</td>
-      <td>3</td>
-      <td>6.12</td>
-      <td>162</td>
-      <td>2.04</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1.82</td>
+      <td>Splinter</td>
+      <td>1.82</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Aetherius, Boon of the Blessed</td>
+      <td>1</td>
       <td>4</td>
-      <td>19.00</td>
-      <td>137</td>
-      <td>4.75</td>
+      <td>9.12</td>
+      <td>Crucifer</td>
+      <td>2.28</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Agatha</td>
-      <td>5</td>
-      <td>9.55</td>
-      <td>120</td>
-      <td>1.91</td>
+      <td>2</td>
+      <td>1</td>
+      <td>3.40</td>
+      <td>Verdict</td>
+      <td>3.40</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Alpha</td>
-      <td>7</td>
-      <td>10.92</td>
-      <td>130</td>
-      <td>1.56</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1.79</td>
+      <td>Phantomlight</td>
+      <td>1.79</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Alpha, Oath of Zeal</td>
-      <td>7</td>
-      <td>20.16</td>
-      <td>79</td>
-      <td>2.88</td>
+      <td>4</td>
+      <td>1</td>
+      <td>2.28</td>
+      <td>Bloodlord's Fetish</td>
+      <td>2.28</td>
     </tr>
   </tbody>
 </table>
@@ -1637,11 +1637,11 @@ most_popular_analysis.head()
   </thead>
   <tbody>
     <tr>
-      <th>92</th>
-      <th>Final Critic</th>
-      <td>14</td>
-      <td>$1.36</td>
-      <td>$38.60</td>
+      <th>39</th>
+      <th>Betrayal, Whisper of Grieving Widows</th>
+      <td>11</td>
+      <td>$2.35</td>
+      <td>$25.85</td>
     </tr>
     <tr>
       <th>84</th>
@@ -1651,18 +1651,11 @@ most_popular_analysis.head()
       <td>$24.53</td>
     </tr>
     <tr>
-      <th>39</th>
-      <th>Betrayal, Whisper of Grieving Widows</th>
-      <td>11</td>
-      <td>$2.35</td>
-      <td>$25.85</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <th>Stormcaller</th>
-      <td>10</td>
-      <td>$4.15</td>
-      <td>$34.65</td>
+      <th>31</th>
+      <th>Trickster</th>
+      <td>9</td>
+      <td>$2.07</td>
+      <td>$18.63</td>
     </tr>
     <tr>
       <th>175</th>
@@ -1670,6 +1663,13 @@ most_popular_analysis.head()
       <td>9</td>
       <td>$1.24</td>
       <td>$11.16</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <th>Serenity</th>
+      <td>9</td>
+      <td>$1.49</td>
+      <td>$13.41</td>
     </tr>
   </tbody>
 </table>
@@ -1732,25 +1732,11 @@ most_profit_analysis.head()
   </thead>
   <tbody>
     <tr>
-      <th>92</th>
-      <th>Final Critic</th>
-      <td>14</td>
-      <td>$1.36</td>
-      <td>$38.60</td>
-    </tr>
-    <tr>
       <th>34</th>
       <th>Retribution Axe</th>
       <td>9</td>
       <td>$4.14</td>
       <td>$37.26</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <th>Stormcaller</th>
-      <td>10</td>
-      <td>$4.15</td>
-      <td>$34.65</td>
     </tr>
     <tr>
       <th>115</th>
@@ -1765,6 +1751,20 @@ most_profit_analysis.head()
       <td>6</td>
       <td>$4.95</td>
       <td>$29.70</td>
+    </tr>
+    <tr>
+      <th>103</th>
+      <th>Singed Scalpel</th>
+      <td>6</td>
+      <td>$4.87</td>
+      <td>$29.22</td>
+    </tr>
+    <tr>
+      <th>107</th>
+      <th>Splitter, Foe Of Subtlety</th>
+      <td>8</td>
+      <td>$3.61</td>
+      <td>$28.88</td>
     </tr>
   </tbody>
 </table>
